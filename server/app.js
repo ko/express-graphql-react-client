@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var cors = require('cors');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var graphqlServer = require('./routes/graphql');
@@ -14,6 +16,13 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+var corsOptions = {
+    origin: true,
+    credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

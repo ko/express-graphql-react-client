@@ -3,6 +3,13 @@ import ReactDOM from 'react-dom';
 
 import {browserHistory, Router, Route, IndexRoute} from 'react-router';
 
+import {Lokka} from 'lokka';
+import {Transport} from 'lokka-transport-http';
+
+let client = new Lokka({
+    transport: new Transport('http://localhost:3000/graphql')
+});
+
 import './style.css'
 
 class App extends React.Component {
@@ -25,15 +32,38 @@ class App extends React.Component {
 
 class Index extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            data: {
+                user: {
+                    name: 'NULL'
+                }
+            }
+        };
+    }
+
+    componentDidMount() {
+        client.query(`
+                     {
+                         user(id:"1"){
+                            name
+                         }
+                     }
+                     `).then(result => {
+                        console.log(result);
+                        this.setState({ data: result });
+                     });
+    }
+
     render() {
     
-        let item = { url: 'the url', title: 'the title' };
-
         return (
             <div>
                 index page
                 <br/>
-                <a href={item.url}>{item.title}</a>
+                {this.state.data.user.name}
             </div>
         );
     }
