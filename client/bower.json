@@ -1,0 +1,24 @@
+{
+  "name": "kkp-web",
+  "description": "",
+  "main": "app/main.js",
+  "authors": [
+    "Ken Ko"
+  ],
+  "license": "ISC",
+  "moduleType": [
+    "es6",
+    "node"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}
